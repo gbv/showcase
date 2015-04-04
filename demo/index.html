@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>showcase viewer</title>
+  <!-- requires IE >= 9: --> 
+  <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="showcase.css">
+  <script src="showcase.js"></script>
+</head>
+<body>
+<div id="wrapper"></div>
+<script>
+$(function() {
+
+    function counter(callback) {
+        var msg = 1;
+        ping();
+        function ping() {
+            callback(msg);
+            if (msg < 15) {
+                setTimeout(ping,500);
+                msg++;
+            }
+        }
+    }
+
+    var frame = new ViewFrame( $('#wrapper')[0] );
+    var channel = new Channel({
+        source: counter, //"ws://localhost:500/numbers",
+        title: "Numbers",
+        view: {
+            css: "console.css"
+        }
+    });
+    channel.display(frame);
+});
+</script>
+</body>
+</html>
