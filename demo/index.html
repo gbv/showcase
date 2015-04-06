@@ -8,7 +8,10 @@
   <script src="showcase.js"></script>
 </head>
 <body>
-<div id="wrapper"></div>
+<table>
+    <tr><td><div id="left"></div></td></tr>
+    <tr><td><div id="right"></div></td></tr>
+</table>
 <script>
 $(function() {
 
@@ -24,15 +27,23 @@ $(function() {
         }
     }
 
-    var frame = new ViewFrame( $('#wrapper')[0] );
-    var channel = new Channel({
-        source: counter, //"ws://localhost:500/numbers",
-        title: "Numbers",
+    var frame = new showcase.ViewFrame( $('#left')[0] );
+    var channel = new showcase.Channel({
+        source: counter,
         view: {
             css: "console.css"
         }
     });
     channel.display(frame);
+
+    var rightChannel = new showcase.Channel({
+        source: "ws://localhost:5000/numbers",
+        title: "Numbers",
+        view: {
+            css: "default.css"
+        }
+    });
+    rightChannel.display( new showcase.ViewFrame( $('#right')[0] ) );
 });
 </script>
 </body>

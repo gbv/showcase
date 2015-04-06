@@ -11,9 +11,9 @@ function receiveEvent(event) {
     // reveive events from parent window
     //if (event.source != parent) return;
 
-    console.log(event);
+//    console.log(event);
     var match = eventRegexp.exec(event.data);
-    console.log(match);
+    //console.log(match);
     if (match) {
         if (match[1] == 'content') {
             receiveContent(match[2]);
